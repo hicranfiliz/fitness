@@ -38,7 +38,7 @@ class OnBoardingPage extends StatelessWidget {
             child: Text(
               pObj["subtitle"].toString(),
               style: TextStyle(
-                color: TColor.light,
+                color: TColor.gray,
                 fontSize: 14,
               ),
             ),
