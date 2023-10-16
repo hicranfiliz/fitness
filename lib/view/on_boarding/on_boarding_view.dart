@@ -10,7 +10,18 @@ class onBoardingView extends StatefulWidget {
 }
 
 class _onBoardingViewState extends State<onBoardingView> {
+  int selectedPage = 0;
   PageController controller = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      selectedPage = controller.page?.round() ?? 0;
+
+      setState(() {});
+    });
+  }
 
   List pageArr = [
     {
@@ -46,6 +57,7 @@ class _onBoardingViewState extends State<onBoardingView> {
     return Scaffold(
       backgroundColor: TColor.white,
       body: Stack(
+        alignment: Alignment.bottomRight,
         children: [
           PageView.builder(
               controller: controller,
@@ -54,7 +66,51 @@ class _onBoardingViewState extends State<onBoardingView> {
                 var pObj = pageArr[index] as Map? ?? {};
 
                 return OnBoardingPage(pObj: pObj);
-              })
+              }),
+          SizedBox(
+            width: 120,
+            height: 120,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  width: 70,
+                  height: 70,
+                  child: CircularProgressIndicator(
+                    color: TColor.primaryColor1,
+                    value: (selectedPage + 1) / 4,
+                    strokeWidth: 2,
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      color: TColor.primaryColor1,
+                      borderRadius: BorderRadius.circular(35)),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.navigate_next,
+                      color: TColor.white,
+                    ),
+                    onPressed: () {
+                      if (selectedPage < 3) {
+                        selectedPage = selectedPage + 1;
+                        controller.jumpToPage(selectedPage);
+
+                        setState(() {});
+                      } else {
+                        // Open Welcome Screen
+                        print("Open Welcome Screen");
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
