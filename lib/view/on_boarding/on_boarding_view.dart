@@ -98,7 +98,10 @@ class _onBoardingViewState extends State<onBoardingView> {
                     onPressed: () {
                       if (selectedPage < 3) {
                         selectedPage = selectedPage + 1;
-                        controller.jumpToPage(selectedPage);
+                        controller.animateToPage(selectedPage,
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.bounceInOut);
+                        //controller.jumpToPage(selectedPage);
 
                         setState(() {});
                       } else {
