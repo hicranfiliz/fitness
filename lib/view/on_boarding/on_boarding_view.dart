@@ -1,5 +1,6 @@
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/on_boarding_page.dart';
+import 'package:fitness/view/login/signup_view.dart';
 import 'package:flutter/material.dart';
 
 class onBoardingView extends StatefulWidget {
@@ -107,6 +108,10 @@ class _onBoardingViewState extends State<onBoardingView> {
                       } else {
                         // Open Welcome Screen
                         print("Open Welcome Screen");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpView()));
                       }
                     },
                   ),
