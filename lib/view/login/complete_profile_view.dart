@@ -1,6 +1,7 @@
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/round_textfield.dart';
+import 'package:fitness/view/login/what_your_goal._view.dart';
 import 'package:flutter/material.dart';
 
 class CompleteProfileView extends StatefulWidget {
@@ -93,7 +94,7 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             )
                           ],
@@ -180,7 +181,7 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const CompleteProfileView()));
+                                      const WhatYourGoalView()));
                         }),
                   ],
                 ),
