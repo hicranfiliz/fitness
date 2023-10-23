@@ -74,17 +74,13 @@ class _LoginViewState extends State<LoginView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Expanded(
-                          child: Text(
-                        "Forgot your password?",
-                        style: TextStyle(
-                            color: TColor.gray,
-                            fontSize: 10,
-                            decoration: TextDecoration.underline),
-                      )),
-                    )
+                    Text(
+                      "Forgot your password?",
+                      style: TextStyle(
+                          color: TColor.gray,
+                          fontSize: 10,
+                          decoration: TextDecoration.underline),
+                    ),
                   ],
                 ),
                 const Spacer(),
