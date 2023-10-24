@@ -4,6 +4,7 @@ import 'package:fitness/common_widget/round_button.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -549,26 +550,97 @@ class _HomeViewState extends State<HomeView> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
+                        width: double.maxFinite,
                         height: media.width * 0.45,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 25, horizontal: 20),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(25),
                             boxShadow: const [
                               BoxShadow(color: Colors.black12, blurRadius: 2)
                             ]),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Sleep",
+                              style: TextStyle(
+                                  color: TColor.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) {
+                                return LinearGradient(
+                                        colors: TColor.primaryG,
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight)
+                                    .createShader(Rect.fromLTRB(
+                                        0, 0, bounds.width, bounds.height));
+                              },
+                              child: Text(
+                                "8h 20m",
+                                style: TextStyle(
+                                    color: TColor.white.withOpacity(0.7),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14),
+                              ),
+                            ),
+                            Image.asset(
+                              "assets/img/sleep_grap.png",
+                              width: double.maxFinite,
+                              fit: BoxFit.fitWidth,
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: media.width * 0.05,
                       ),
                       Container(
+                        width: double.maxFinite,
                         height: media.width * 0.45,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 25, horizontal: 20),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(25),
                             boxShadow: const [
                               BoxShadow(color: Colors.black12, blurRadius: 2)
                             ]),
-                      )
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Calories",
+                              style: TextStyle(
+                                  color: TColor.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) {
+                                return LinearGradient(
+                                        colors: TColor.primaryG,
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight)
+                                    .createShader(Rect.fromLTRB(
+                                        0, 0, bounds.width, bounds.height));
+                              },
+                              child: Text(
+                                "760 kCal",
+                                style: TextStyle(
+                                    color: TColor.white.withOpacity(0.7),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ))
                 ],
