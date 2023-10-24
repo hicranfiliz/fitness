@@ -1,3 +1,4 @@
+import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -47,6 +48,14 @@ class _HomeViewState extends State<HomeView> {
         FlSpot(29, 60),
         FlSpot(30, 40),
       ];
+
+  List waterArr = [
+    {"title": "6am - 8am", "subtitle": "600ml"},
+    {"title": "9am - 11am", "subtitle": "500ml"},
+    {"title": "11am - 2pm", "subtitle": "1000ml"},
+    {"title": "2pm - 4pm", "subtitle": "700ml"},
+    {"title": "4pm - now", "subtitle": "900ml"}
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -445,6 +454,86 @@ class _HomeViewState extends State<HomeView> {
                                   fontSize: 12,
                                 ),
                               ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: waterArr.map((wObj) {
+                                  var isLast = wObj == waterArr.last;
+                                  return Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4),
+                                              width: 10,
+                                              height: 10,
+                                              decoration: BoxDecoration(
+                                                  color: TColor.secondaryColor1
+                                                      .withOpacity(0.5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                            ),
+                                            if (!isLast)
+                                              DottedDashedLine(
+                                                  height: media.width * 0.078,
+                                                  width: 0,
+                                                  dashColor: TColor
+                                                      .secondaryColor1
+                                                      .withOpacity(0.5),
+                                                  axis: Axis.vertical)
+                                          ]),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            wObj["title"].toString(),
+                                            style: TextStyle(
+                                              color: TColor.gray,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                          ShaderMask(
+                                            blendMode: BlendMode.srcIn,
+                                            shaderCallback: (bounds) {
+                                              return LinearGradient(
+                                                      colors: TColor.secondaryG,
+                                                      begin:
+                                                          Alignment.centerLeft,
+                                                      end:
+                                                          Alignment.centerRight)
+                                                  .createShader(Rect.fromLTRB(
+                                                      0,
+                                                      0,
+                                                      bounds.width,
+                                                      bounds.height));
+                                            },
+                                            child: Text(
+                                              wObj["subtitle"].toString(),
+                                              style: TextStyle(
+                                                  color: TColor.white
+                                                      .withOpacity(0.7),
+                                                  fontSize: 12),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  );
+                                }).toList(),
+                              )
                             ],
                           ))
                         ],
@@ -479,7 +568,7 @@ class _HomeViewState extends State<HomeView> {
                             boxShadow: const [
                               BoxShadow(color: Colors.black12, blurRadius: 2)
                             ]),
-                      ),
+                      )
                     ],
                   ))
                 ],
