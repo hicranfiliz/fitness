@@ -588,6 +588,7 @@ class _HomeViewState extends State<HomeView> {
                                     fontSize: 14),
                               ),
                             ),
+                            const Spacer(),
                             Image.asset(
                               "assets/img/sleep_grap.png",
                               width: double.maxFinite,
@@ -638,6 +639,47 @@ class _HomeViewState extends State<HomeView> {
                                     fontSize: 14),
                               ),
                             ),
+                            const Spacer(),
+                            Container(
+                              alignment: Alignment.center,
+                              child: SizedBox(
+                                width: media.width * 0.2,
+                                height: media.width * 0.2,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      width: media.width * 0.15,
+                                      height: media.width * 0.15,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                            colors: TColor.primaryG),
+                                        borderRadius: BorderRadius.circular(
+                                            media.width * 0.075),
+                                      ),
+                                      child: FittedBox(
+                                        child: Text(
+                                          "230 kCal\nleft",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: TColor.white,
+                                              fontSize: 11),
+                                        ),
+                                      ),
+                                    ),
+                                    SimpleCircularProgressBar(
+                                      progressStrokeWidth: 10,
+                                      backStrokeWidth: 10,
+                                      progressColors: TColor.primaryG,
+                                      backColor: Colors.grey.shade100,
+                                      valueNotifier: ValueNotifier(50),
+                                      startAngle: -180,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
