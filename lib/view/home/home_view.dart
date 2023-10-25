@@ -1,6 +1,7 @@
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
+import 'package:fitness/common_widget/workout_row.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
@@ -14,6 +15,29 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  List lastWorkoutArr = [
+    {
+      "name": "FullBody Workout",
+      "image": "assets/img/Workout1.png",
+      "kcal": "180",
+      "time": "20",
+      "progress": 0.3
+    },
+    {
+      "name": "Lowerbody",
+      "image": "assets/img/Workout2.png",
+      "kcal": "200",
+      "time": "30",
+      "progress": 0.4
+    },
+    {
+      "name": "Ab Workout",
+      "image": "assets/img/Workout3.png",
+      "kcal": "300",
+      "time": "40",
+      "progress": 0.7
+    }
+  ];
   List<int> showingTooltipOnSpots = [21];
 
   List<FlSpot> get allSpots => const [
@@ -847,6 +871,41 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                   )),
+              SizedBox(
+                height: media.width * 0.05,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Latest Workout",
+                    style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "See More",
+                      style: TextStyle(
+                        color: TColor.gray,
+                        fontSize: 14,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: lastWorkoutArr.length,
+                itemBuilder: (context, index) {
+                  var wObj = lastWorkoutArr[index] as Map? ?? {};
+                  return WorkoutRow(wObj: wObj);
+                },
+              ),
               SizedBox(
                 height: media.width * 0.1,
               ),
