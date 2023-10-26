@@ -3,6 +3,7 @@ import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/workout_row.dart';
 import 'package:fitness/view/home/activity_tracker_view.dart';
+import 'package:fitness/view/home/finished_workout_view.dart';
 import 'package:fitness/view/home/notification_view.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -917,7 +918,15 @@ class _HomeViewState extends State<HomeView> {
                 itemCount: lastWorkoutArr.length,
                 itemBuilder: (context, index) {
                   var wObj = lastWorkoutArr[index] as Map? ?? {};
-                  return WorkoutRow(wObj: wObj);
+                  return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const FinishedWorkoutView()));
+                      },
+                      child: WorkoutRow(wObj: wObj));
                 },
               ),
               SizedBox(
