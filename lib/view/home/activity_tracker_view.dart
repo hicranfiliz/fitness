@@ -1,4 +1,5 @@
 import 'package:fitness/common/colo_extension.dart';
+import 'package:fitness/common_widget/lates_activity_row.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/today_target_cell.dart';
 import 'package:flutter/material.dart';
@@ -11,40 +12,21 @@ class ActivityTrackerView extends StatefulWidget {
 }
 
 class _ActivityTrackerViewState extends State<ActivityTrackerView> {
-  List notificationArr = [
+  List latestArr = [
     {
-      "image": "assets/img/Workout1.png",
-      "title": "It's time for lunch",
+      "image": "assets/img/pic_4.png",
+      "title": "Drinking 300ml Water",
       "time": "About 1 minutes ago"
     },
     {
-      "image": "assets/img/Workout2.png",
-      "title": "Don't miss your lowebody workout",
+      "image": "assets/img/pic_5.png",
+      "title": "Eat Snack (Fitbar)",
       "time": "About 3 hours ago"
     },
-    {
-      "image": "assets/img/Workout3.png",
-      "title": "Let's add some meals on your b",
-      "time": "About 3 hours ago"
-    },
-    {
-      "image": "assets/img/Workout1.png",
-      "title": "Congratulations, You have finished A..",
-      "time": "29 May"
-    },
-    {
-      "image": "assets/img/Workout2.png",
-      "title": "It's time for lunch",
-      "time": "8 April"
-    },
-    {
-      "image": "assets/img/Workout3.png",
-      "title": "Ups, You have missed your Lowebo...",
-      "time": "8 April"
-    }
   ];
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TColor.white,
@@ -168,6 +150,44 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                     )
                   ],
                 ),
+              ),
+              SizedBox(
+                height: media.width * 0.05,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Latest Workout",
+                    style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "See More",
+                      style: TextStyle(
+                        color: TColor.gray,
+                        fontSize: 14,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: latestArr.length,
+                itemBuilder: (context, index) {
+                  var wObj = latestArr[index] as Map? ?? {};
+                  return LatestActivityRow(wObj: wObj);
+                },
+              ),
+              SizedBox(
+                height: media.width * 0.1,
               ),
             ],
           ),
