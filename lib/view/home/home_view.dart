@@ -859,8 +859,8 @@ class _HomeViewState extends State<HomeView> {
                       maxY: 110,
                       titlesData: FlTitlesData(
                           show: true,
-                          leftTitles: AxisTitles(),
-                          topTitles: AxisTitles(),
+                          leftTitles: const AxisTitles(),
+                          topTitles: const AxisTitles(),
                           bottomTitles: AxisTitles(
                             sideTitles: bottomTitles,
                           ),
