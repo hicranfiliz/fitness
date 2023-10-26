@@ -1,4 +1,5 @@
 import 'package:fitness/common/colo_extension.dart';
+import 'package:fitness/common_widget/notifictaion_row.dart';
 import 'package:flutter/material.dart';
 
 class NotificationView extends StatefulWidget {
@@ -86,8 +87,8 @@ class _NotificationViewState extends State<NotificationView> {
                   borderRadius: BorderRadius.circular(10)),
               child: Image.asset(
                 "assets/img/more_btn.png",
-                width: 15,
-                height: 15,
+                width: 12,
+                height: 12,
                 fit: BoxFit.contain,
               ),
             ),
@@ -99,49 +100,7 @@ class _NotificationViewState extends State<NotificationView> {
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           itemBuilder: ((context, index) {
             var nObj = notificationArr[index] as Map? ?? {};
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Row(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(nObj["image"].toString(),
-                          width: 40, height: 40, fit: BoxFit.cover)),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        nObj["title"].toString(),
-                        style: TextStyle(
-                          color: TColor.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        ),
-                      ),
-                      Text(
-                        nObj["time"].toString(),
-                        style: TextStyle(
-                          color: TColor.gray,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  )),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        "assets/img/sub_menu.png",
-                        width: 15,
-                        height: 15,
-                        fit: BoxFit.contain,
-                      ))
-                ],
-              ),
-            );
+            return NotificationRow(nObj: nObj);
           }),
           separatorBuilder: (context, index) {
             return Divider(

@@ -2,6 +2,7 @@ import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/workout_row.dart';
+import 'package:fitness/view/home/activity_tracker_view.dart';
 import 'package:fitness/view/home/notification_view.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -253,7 +254,13 @@ class _HomeViewState extends State<HomeView> {
                           type: RoundButtonType.bgGradient,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          onPressed: () {}),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ActivityTrackerView()));
+                          }),
                     )
                   ],
                 ),
