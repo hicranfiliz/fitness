@@ -2,6 +2,7 @@ import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/latest_activity_row.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/upcoming_workout_row.dart';
+import 'package:fitness/common_widget/what_train_row.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,27 @@ class _WorkoutTrackerViewState extends State<WorkoutTrackerView> {
       "image": "assets/img/Workout2.png",
       "title": "Upperbody Workout",
       "time": "June 05, 02:00pm"
+    },
+  ];
+
+  List whatArr = [
+    {
+      "image": "assets/img/what_1.png",
+      "title": "Fullbody Workout",
+      "exercises": "11 Exercises",
+      "time": "32mins"
+    },
+    {
+      "image": "assets/img/what_2.png",
+      "title": "Lowerbody Workout",
+      "exercises": "12 Exercises",
+      "time": "40mins"
+    },
+    {
+      "image": "assets/img/what_3.png",
+      "title": "AB Workout",
+      "exercises": "14 Exercises",
+      "time": "20mins"
     },
   ];
   @override
@@ -271,6 +293,31 @@ class _WorkoutTrackerViewState extends State<WorkoutTrackerView> {
                       itemBuilder: (context, index) {
                         var wObj = latestArr[index] as Map? ?? {};
                         return UpcomingWorkoutRow(wObj: wObj);
+                      },
+                    ),
+                    SizedBox(
+                      height: media.width * 0.05,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "What Do You Want to Train",
+                          style: TextStyle(
+                              color: TColor.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                    ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: whatArr.length,
+                      itemBuilder: (context, index) {
+                        var wObj = whatArr[index] as Map? ?? {};
+                        return WhatTrainRow(wObj: wObj);
                       },
                     ),
                     SizedBox(
