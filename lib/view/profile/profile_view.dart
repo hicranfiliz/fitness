@@ -270,14 +270,14 @@ class _ProfileViewState extends State<ProfileView> {
                                       foregroundIndicatorBuilder:
                                           (context, global) {
                                         return SizedBox.fromSize(
-                                          size: Size(20, 20),
+                                          size: const Size(20, 20),
                                           child: DecoratedBox(
                                             decoration: BoxDecoration(
                                               color: TColor.white,
                                               borderRadius:
                                                   const BorderRadius.all(
                                                       Radius.circular(50.0)),
-                                              boxShadow: [
+                                              boxShadow: const [
                                                 BoxShadow(
                                                     color: Colors.black38,
                                                     spreadRadius: 0.05,
