@@ -15,7 +15,7 @@ class _UpcomingWorkoutRowState extends State<UpcomingWorkoutRow> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: TColor.white,

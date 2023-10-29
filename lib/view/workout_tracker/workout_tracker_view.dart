@@ -3,6 +3,7 @@ import 'package:fitness/common_widget/latest_activity_row.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/upcoming_workout_row.dart';
 import 'package:fitness/common_widget/what_train_row.dart';
+import 'package:fitness/view/workout_tracker/workout_detail_view.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,7 @@ class _WorkoutTrackerViewState extends State<WorkoutTrackerView> {
                 title: Text(
                   "Workout Tracker",
                   style: TextStyle(
-                      color: TColor.black,
+                      color: TColor.white,
                       fontSize: 16,
                       fontWeight: FontWeight.w700),
                 ),
@@ -317,7 +318,15 @@ class _WorkoutTrackerViewState extends State<WorkoutTrackerView> {
                       itemCount: whatArr.length,
                       itemBuilder: (context, index) {
                         var wObj = whatArr[index] as Map? ?? {};
-                        return WhatTrainRow(wObj: wObj);
+                        return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          WorkoutDetailView(dObj: wObj)));
+                            },
+                            child: WhatTrainRow(wObj: wObj));
                       },
                     ),
                     SizedBox(
