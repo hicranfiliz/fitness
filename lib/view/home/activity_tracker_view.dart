@@ -1,5 +1,5 @@
 import 'package:fitness/common/colo_extension.dart';
-import 'package:fitness/common_widget/lates_activity_row.dart';
+import 'package:fitness/common_widget/latest_activity_row.dart';
 import 'package:fitness/common_widget/today_target_cell.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
