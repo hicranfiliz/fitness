@@ -5,6 +5,7 @@ import 'package:fitness/common_widget/latest_activity_row.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/upcoming_workout_row.dart';
 import 'package:fitness/common_widget/what_train_row.dart';
+import 'package:fitness/view/workout_tracker/exercise_step_detail.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -348,14 +349,12 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                             return ExercisesSetSection(
                               sObj: sObj,
                               onPressed: (obj) {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => ExercisesStepDetails(
-                                //       eObj: obj,
-                                //     ),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ExercisesStepDetails(eObj: obj)),
+                                );
                               },
                             );
                           }),
@@ -382,5 +381,3 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
     );
   }
 }
-
-class ExercisesStepDetails {}
