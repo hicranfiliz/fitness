@@ -181,10 +181,10 @@ class _WorkoutScheduleViewState extends State<WorkoutScheduleView> {
             firstDate: DateTime.now().subtract(const Duration(days: 140)),
             lastDate: DateTime.now().add(const Duration(days: 60)),
 
-            // onDateSelected: (date) {
-            //   _selectedDateAppBBar = date;
-            //   setDayEventWorkoutList();
-            // },
+            onDateSelected: (date) {
+              _selectedDateAppBBar = date;
+              setDayEventWorkoutList();
+            },
             selectedDayLogo: Container(
               width: double.maxFinite,
               height: double.maxFinite,
