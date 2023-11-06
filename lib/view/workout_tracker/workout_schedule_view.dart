@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/colo_extension.dart';
-//import '../../common/common.dart';
+import '../../common/common.dart';
 import '../../common_widget/round_button.dart';
-//import 'add_schedule_view.dart';
+import 'add_schedule_view.dart';
 
 class WorkoutScheduleView extends StatefulWidget {
   const WorkoutScheduleView({
@@ -421,12 +421,12 @@ class _WorkoutScheduleViewState extends State<WorkoutScheduleView> {
       ),
       floatingActionButton: InkWell(
         onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => AddScheduleView(
-          //               date: _selectedDateAppBBar,
-          //             )));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddScheduleView(
+                        date: _selectedDateAppBBar,
+                      )));
         },
         child: Container(
           width: 55,
