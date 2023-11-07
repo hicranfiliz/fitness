@@ -1,3 +1,4 @@
+import 'package:fitness/common_widget/find_eat_cell.dart';
 import 'package:fitness/common_widget/today_meal_row.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -398,10 +399,10 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                         //         builder: (context) =>
                         //             MealFoodDetailsView(eObj: fObj)));
                       },
-                      // child: FindEatCell(
-                      //   fObj: fObj,
-                      //   index: index,
-                      // ),
+                      child: FindEatCell(
+                        fObj: fObj,
+                        index: index,
+                      ),
                     );
                   }),
             ),
