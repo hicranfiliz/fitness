@@ -438,13 +438,7 @@ class _FoodInfoDetailsViewState extends State<FoodInfoDetailsView> {
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: RoundButton(
                             title: "Add to ${widget.mObj["name"]} Meal",
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MealScheduleView()));
-                            }),
+                            onPressed: () {}),
                       ),
                     ],
                   ),

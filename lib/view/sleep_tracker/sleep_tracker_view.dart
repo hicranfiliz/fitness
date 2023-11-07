@@ -1,34 +1,31 @@
-import 'package:fitness/common_widget/find_eat_cell.dart';
-import 'package:fitness/common_widget/today_meal_row.dart';
-import 'package:fitness/view/meal_planner/meal_schedule_view.dart';
+//import 'package:fitness/view/sleep_tracker/sleep_schedule_view.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/colo_extension.dart';
-//import '../../common_widget/find_eat_cell.dart';
 import '../../common_widget/round_button.dart';
-//import '../../common_widget/today_meal_row.dart';
-import 'meal_food_details_view.dart';
-//import 'meal_schedule_view.dart';
+import '../../common_widget/today_sleep_schedule_row.dart';
 
-class MealPlannerView extends StatefulWidget {
-  const MealPlannerView({super.key});
+class SleepTrackerView extends StatefulWidget {
+  const SleepTrackerView({super.key});
 
   @override
-  State<MealPlannerView> createState() => _MealPlannerViewState();
+  State<SleepTrackerView> createState() => _SleepTrackerViewState();
 }
 
-class _MealPlannerViewState extends State<MealPlannerView> {
-  List todayMealArr = [
+class _SleepTrackerViewState extends State<SleepTrackerView> {
+  List todaySleepArr = [
     {
-      "name": "Salmon Nigiri",
-      "image": "assets/img/m_1.png",
-      "time": "28/05/2023 07:00 AM"
+      "name": "Bedtime",
+      "image": "assets/img/bed.png",
+      "time": "01/06/2023 09:00 PM",
+      "duration": "in 6hours 22minutes"
     },
     {
-      "name": "Lowfat Milk",
-      "image": "assets/img/m_2.png",
-      "time": "28/05/2023 08:00 AM"
+      "name": "Alarm",
+      "image": "assets/img/alaarm.png",
+      "time": "02/06/2023 05:10 AM",
+      "duration": "in 14hours 30minutes"
     },
   ];
 
@@ -41,10 +38,12 @@ class _MealPlannerViewState extends State<MealPlannerView> {
     {"name": "Lunch", "image": "assets/img/m_4.png", "number": "130+ Foods"},
   ];
 
+  List<int> showingTooltipOnSpots = [4];
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
-
+    final tooltipsOnBar = lineBarsData1[0];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TColor.white,
@@ -71,7 +70,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
           ),
         ),
         title: Text(
-          "Meal Planner",
+          "Sleep Tracker",
           style: TextStyle(
               color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
@@ -106,83 +105,39 @@ class _MealPlannerViewState extends State<MealPlannerView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Meal Nutritions",
-                        style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Container(
-                          height: 30,
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: TColor.primaryG),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              items: ["Weekly", "Monthly"]
-                                  .map((name) => DropdownMenuItem(
-                                        value: name,
-                                        child: Text(
-                                          name,
-                                          style: TextStyle(
-                                              color: TColor.gray, fontSize: 14),
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {},
-                              icon:
-                                  Icon(Icons.expand_more, color: TColor.white),
-                              hint: Text(
-                                "Weekly",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: TColor.white, fontSize: 12),
-                              ),
-                            ),
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: media.width * 0.05,
-                  ),
                   Container(
                       padding: const EdgeInsets.only(left: 15),
                       height: media.width * 0.5,
                       width: double.maxFinite,
                       child: LineChart(
                         LineChartData(
-                          // showingTooltipIndicators:
-                          //     showingTooltipOnSpots.map((index) {
-                          //   return ShowingTooltipIndicators([
-                          //     LineBarSpot(
-                          //       tooltipsOnBar,
-                          //       lineBarsData.indexOf(tooltipsOnBar),
-                          //       tooltipsOnBar.spots[index],
-                          //     ),
-                          //   ]);
-                          // }).toList(),
+                          showingTooltipIndicators:
+                              showingTooltipOnSpots.map((index) {
+                            return ShowingTooltipIndicators([
+                              LineBarSpot(
+                                tooltipsOnBar,
+                                lineBarsData1.indexOf(tooltipsOnBar),
+                                tooltipsOnBar.spots[index],
+                              ),
+                            ]);
+                          }).toList(),
                           lineTouchData: LineTouchData(
                             enabled: true,
                             handleBuiltInTouches: false,
                             touchCallback: (FlTouchEvent event,
                                 LineTouchResponse? response) {
-                              // if (response == null || response.lineBarSpots == null) {
-                              //   return;
-                              // }
-                              // if (event is FlTapUpEvent) {
-                              //   final spotIndex =
-                              //       response.lineBarSpots!.first.spotIndex;
-                              //   showingTooltipOnSpots.clear();
-                              //   setState(() {
-                              //     showingTooltipOnSpots.add(spotIndex);
-                              //   });
-                              // }
+                              if (response == null ||
+                                  response.lineBarSpots == null) {
+                                return;
+                              }
+                              if (event is FlTapUpEvent) {
+                                final spotIndex =
+                                    response.lineBarSpots!.first.spotIndex;
+                                showingTooltipOnSpots.clear();
+                                setState(() {
+                                  showingTooltipOnSpots.add(spotIndex);
+                                });
+                              }
                             },
                             mouseCursorResolver: (FlTouchEvent event,
                                 LineTouchResponse? response) {
@@ -196,7 +151,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                                 List<int> spotIndexes) {
                               return spotIndexes.map((index) {
                                 return TouchedSpotIndicatorData(
-                                  FlLine(
+                                  const FlLine(
                                     color: Colors.transparent,
                                   ),
                                   FlDotData(
@@ -206,8 +161,8 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                                             FlDotCirclePainter(
                                       radius: 3,
                                       color: Colors.white,
-                                      strokeWidth: 3,
-                                      strokeColor: TColor.secondaryColor1,
+                                      strokeWidth: 1,
+                                      strokeColor: TColor.primaryColor2,
                                     ),
                                   ),
                                 );
@@ -215,12 +170,12 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                             },
                             touchTooltipData: LineTouchTooltipData(
                               tooltipBgColor: TColor.secondaryColor1,
-                              tooltipRoundedRadius: 20,
+                              tooltipRoundedRadius: 5,
                               getTooltipItems:
                                   (List<LineBarSpot> lineBarsSpot) {
                                 return lineBarsSpot.map((lineBarSpot) {
                                   return LineTooltipItem(
-                                    "${lineBarSpot.x.toInt()} mins ago",
+                                    "${lineBarSpot.y.toInt()} hours",
                                     const TextStyle(
                                       color: Colors.white,
                                       fontSize: 10,
@@ -232,12 +187,12 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                             ),
                           ),
                           lineBarsData: lineBarsData1,
-                          minY: -0.5,
-                          maxY: 110,
+                          minY: -0.01,
+                          maxY: 10.01,
                           titlesData: FlTitlesData(
                               show: true,
-                              leftTitles: AxisTitles(),
-                              topTitles: AxisTitles(),
+                              leftTitles: const AxisTitles(),
+                              topTitles: const AxisTitles(),
                               bottomTitles: AxisTitles(
                                 sideTitles: bottomTitles,
                               ),
@@ -247,7 +202,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                           gridData: FlGridData(
                             show: true,
                             drawHorizontalLine: true,
-                            horizontalInterval: 25,
+                            horizontalInterval: 2,
                             drawVerticalLine: false,
                             getDrawingHorizontalLine: (value) {
                               return FlLine(
@@ -268,6 +223,48 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                     height: media.width * 0.05,
                   ),
                   Container(
+                    width: double.maxFinite,
+                    height: media.width * 0.4,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: TColor.primaryG),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Text(
+                              "Last Night Sleep",
+                              style: TextStyle(
+                                color: TColor.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Text(
+                              "8h 20m",
+                              style: TextStyle(
+                                  color: TColor.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          const Spacer(),
+                          Image.asset(
+                            "assets/img/SleepGraph.png",
+                            width: double.maxFinite,
+                          )
+                        ]),
+                  ),
+                  SizedBox(
+                    height: media.width * 0.05,
+                  ),
+                  Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 15),
                     decoration: BoxDecoration(
@@ -278,7 +275,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Daily Meal Schedule",
+                          "Daily Sleep Schedule",
                           style: TextStyle(
                               color: TColor.black,
                               fontSize: 14,
@@ -293,13 +290,13 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const MealScheduleView(),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         const SleepScheduleView(),
+                              //   ),
+                              // );
                             },
                           ),
                         )
@@ -309,103 +306,29 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                   SizedBox(
                     height: media.width * 0.05,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Today Meals",
-                        style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Container(
-                          height: 30,
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: TColor.primaryG),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              items: [
-                                "Breakfast",
-                                "Lunch",
-                                "Dinner",
-                                "Snack",
-                                "Dessert"
-                              ]
-                                  .map((name) => DropdownMenuItem(
-                                        value: name,
-                                        child: Text(
-                                          name,
-                                          style: TextStyle(
-                                              color: TColor.gray, fontSize: 14),
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {},
-                              icon:
-                                  Icon(Icons.expand_more, color: TColor.white),
-                              hint: Text(
-                                "Breakfast",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: TColor.white, fontSize: 12),
-                              ),
-                            ),
-                          )),
-                    ],
+                  Text(
+                    "Today Schedule",
+                    style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
                   ),
                   SizedBox(
-                    height: media.width * 0.05,
+                    height: media.width * 0.03,
                   ),
                   ListView.builder(
                       padding: EdgeInsets.zero,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: todayMealArr.length,
+                      itemCount: todaySleepArr.length,
                       itemBuilder: (context, index) {
-                        var mObj = todayMealArr[index] as Map? ?? {};
-                        return TodayMealRow(
-                          mObj: mObj,
+                        var sObj = todaySleepArr[index] as Map? ?? {};
+                        return TodaySleepScheduleRow(
+                          sObj: sObj,
                         );
                       }),
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                "Find Something to Eat",
-                style: TextStyle(
-                    color: TColor.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            SizedBox(
-              height: media.width * 0.55,
-              child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: findEatArr.length,
-                  itemBuilder: (context, index) {
-                    var fObj = findEatArr[index] as Map? ?? {};
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    MealFoodDetailsView(eObj: fObj)));
-                      },
-                      child: FindEatCell(
-                        fObj: fObj,
-                        index: index,
-                      ),
-                    );
-                  }),
             ),
             SizedBox(
               height: media.width * 0.05,
@@ -428,31 +351,29 @@ class _MealPlannerViewState extends State<MealPlannerView> {
         ]),
         barWidth: 2,
         isStrokeCapRound: true,
-        dotData: FlDotData(
+        dotData: const FlDotData(show: false),
+        belowBarData: BarAreaData(
           show: true,
-          getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
-            radius: 3,
-            color: Colors.white,
-            strokeWidth: 1,
-            strokeColor: TColor.primaryColor2,
-          ),
+          gradient: LinearGradient(colors: [
+            TColor.primaryColor2,
+            TColor.white,
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
-        belowBarData: BarAreaData(show: false),
         spots: const [
-          FlSpot(1, 35),
-          FlSpot(2, 70),
-          FlSpot(3, 40),
-          FlSpot(4, 80),
-          FlSpot(5, 25),
-          FlSpot(6, 70),
-          FlSpot(7, 35),
+          FlSpot(1, 3),
+          FlSpot(2, 5),
+          FlSpot(3, 4),
+          FlSpot(4, 7),
+          FlSpot(5, 4),
+          FlSpot(6, 8),
+          FlSpot(7, 5),
         ],
       );
 
   SideTitles get rightTitles => SideTitles(
         getTitlesWidget: rightTitleWidgets,
         showTitles: true,
-        interval: 20,
+        interval: 2,
         reservedSize: 40,
       );
 
@@ -460,22 +381,22 @@ class _MealPlannerViewState extends State<MealPlannerView> {
     String text;
     switch (value.toInt()) {
       case 0:
-        text = '0%';
+        text = '0h';
         break;
-      case 20:
-        text = '20%';
+      case 2:
+        text = '2h';
         break;
-      case 40:
-        text = '40%';
+      case 4:
+        text = '4h';
         break;
-      case 60:
-        text = '60%';
+      case 6:
+        text = '6h';
         break;
-      case 80:
-        text = '80%';
+      case 8:
+        text = '8h';
         break;
-      case 100:
-        text = '100%';
+      case 10:
+        text = '10h';
         break;
       default:
         return Container();
