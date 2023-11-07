@@ -5,7 +5,7 @@ import '../../common/colo_extension.dart';
 import '../../common_widget/meal_category_cell.dart';
 import '../../common_widget/popular_meal_row.dart';
 import '../../common_widget/today_meal_row.dart';
-//import 'food_info_details_view.dart';
+import 'food_info_details_view.dart';
 
 class MealFoodDetailsView extends StatefulWidget {
   final Map eObj;
@@ -274,15 +274,15 @@ class _MealFoodDetailsViewState extends State<MealFoodDetailsView> {
                   var fObj = popularArr[index] as Map? ?? {};
                   return InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => FoodInfoDetailsView(
-                      //       dObj: fObj,
-                      //       mObj: widget.eObj,
-                      //     ),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodInfoDetailsView(
+                            dObj: fObj,
+                            mObj: widget.eObj,
+                          ),
+                        ),
+                      );
                     },
                     child: PopularMealRow(
                       mObj: fObj,
