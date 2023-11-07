@@ -1,5 +1,6 @@
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
+import 'package:fitness/view/meal_planner/meal_schedule_view.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
@@ -437,7 +438,13 @@ class _FoodInfoDetailsViewState extends State<FoodInfoDetailsView> {
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: RoundButton(
                             title: "Add to ${widget.mObj["name"]} Meal",
-                            onPressed: () {}),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MealScheduleView()));
+                            }),
                       ),
                     ],
                   ),
