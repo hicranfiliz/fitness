@@ -7,7 +7,7 @@ import '../../common/colo_extension.dart';
 //import '../../common_widget/find_eat_cell.dart';
 import '../../common_widget/round_button.dart';
 //import '../../common_widget/today_meal_row.dart';
-//import 'meal_food_details_view.dart';
+import 'meal_food_details_view.dart';
 //import 'meal_schedule_view.dart';
 
 class MealPlannerView extends StatefulWidget {
@@ -284,7 +284,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                               fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
-                          width: 70,
+                          width: 80,
                           height: 25,
                           child: RoundButton(
                             title: "Check",
@@ -393,11 +393,11 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                     var fObj = findEatArr[index] as Map? ?? {};
                     return InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             MealFoodDetailsView(eObj: fObj)));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    MealFoodDetailsView(eObj: fObj)));
                       },
                       child: FindEatCell(
                         fObj: fObj,
