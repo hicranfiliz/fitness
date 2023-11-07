@@ -1,4 +1,4 @@
-//import 'package:fitness/view/sleep_tracker/sleep_schedule_view.dart';
+import 'package:fitness/view/sleep_tracker/sleep_schedule_view.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -290,13 +290,13 @@ class _SleepTrackerViewState extends State<SleepTrackerView> {
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         const SleepScheduleView(),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SleepScheduleView(),
+                                ),
+                              );
                             },
                           ),
                         )
