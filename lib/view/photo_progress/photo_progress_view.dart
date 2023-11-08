@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../common/colo_extension.dart';
 import '../../common_widget/round_button.dart';
-//import 'comparison_view.dart';
+import 'comparison_view.dart';
 
 class PhotoProgressView extends StatefulWidget {
   const PhotoProgressView({super.key});
@@ -215,12 +215,12 @@ class _PhotoProgressViewState extends State<PhotoProgressView> {
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => const ComparisonView(),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ComparisonView(),
+                              ),
+                            );
                           },
                         ),
                       )
