@@ -51,7 +51,7 @@ class _UpcomingWorkoutRowState extends State<UpcomingWorkoutRow> {
           )),
           CustomAnimatedToggleSwitch<bool>(
             current: positive,
-            values: [false, true],
+            values: const [false, true],
             spacing: 0.0,
             indicatorSize: const Size.square(30.0),
             animationDuration: const Duration(milliseconds: 200),

@@ -1,6 +1,8 @@
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/round_textfield.dart';
+import 'package:fitness/services/api_service_dart.dart';
+import 'package:fitness/services/user/user_register_service.dart';
 import 'package:fitness/view/login/complete_profile_view.dart';
 import 'package:fitness/view/login/login_view.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,92 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
+  // TextEditingController'lar tanımlanır
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final ApiService _apiService = ApiService();
+  late final RegisterService _registerService;
+
+  @override
+  void initState() {
+    super.initState();
+    _registerService = RegisterService(_apiService);
+  }
+
+  void _register() async {
+    // Controller'lardan verileri al
+    String name = _firstNameController.text.trim();
+    String lastName = _lastNameController.text.trim();
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    // Boş alan kontrolü
+    if (name.isEmpty || lastName.isEmpty || email.isEmpty || password.isEmpty) {
+      _showDialog('Error', 'All fields are required.');
+      return;
+    }
+
+    // Kullanıcı kayıt işlemlerini burada yapın
+    try {
+      bool isRegistered = await _registerService.registerUser(
+        name: name,
+        lastName: lastName,
+        email: email,
+        password: password,
+      );
+      //if (!mounted) return; // Widget ağaçta değilse, işlemi durdur
+      // İşlemleri burada yapın
+      if (isRegistered) {
+        // Başarılı kayıt işlemi
+        // Kullanıcıya başarı mesajı gösterilebilir veya başka bir ekrana yönlendirilebilir
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => CompleteProfileView()), // Kullanıcıyı sonraki ekrana götür
+        // );
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const CompleteProfileView()));
+      } else {
+        // Hatalı kayıt işlemi, kullanıcıya hata mesajı göster
+        _showDialog('Registration Failed', 'Failed to Register user:');
+      }
+    } catch (e) {
+      // Hata durumunda kullanıcıya hata mesajı göster
+      _showDialog('Error', e.toString());
+    }
+  }
+
+  // Hata mesajı göstermek için kullanılan fonksiyon
+  void _showDialog(String title, String content) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    // Kaynakları serbest bırak
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   bool isCheck = false;
   @override
   Widget build(BuildContext context) {
@@ -40,17 +128,22 @@ class _SignUpViewState extends State<SignUpView> {
                 SizedBox(
                   height: media.width * 0.05,
                 ),
-                const RoundTextField(
-                    hintText: "First Name", icon: "assets/img/user_text.png"),
+                RoundTextField(
+                    controller: _firstNameController,
+                    hintText: "First Name",
+                    icon: "assets/img/user_text.png"),
                 SizedBox(
                   height: media.width * 0.04,
                 ),
-                const RoundTextField(
-                    hintText: "Last Name", icon: "assets/img/user_text.png"),
+                RoundTextField(
+                    controller: _lastNameController,
+                    hintText: "Last Name",
+                    icon: "assets/img/user_text.png"),
                 SizedBox(
                   height: media.width * 0.04,
                 ),
-                const RoundTextField(
+                RoundTextField(
+                  controller: _emailController,
                   hintText: "Email",
                   icon: "assets/img/email.png",
                   keyboardType: TextInputType.emailAddress,
@@ -59,6 +152,7 @@ class _SignUpViewState extends State<SignUpView> {
                   height: media.width * 0.04,
                 ),
                 RoundTextField(
+                  controller: _passwordController,
                   hintText: "Password",
                   icon: "assets/img/lock.png",
                   obscureText: true,
@@ -109,11 +203,12 @@ class _SignUpViewState extends State<SignUpView> {
                 RoundButton(
                     title: "Register",
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const CompleteProfileView()));
+                      _register();
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             const CompleteProfileView()));
                     }),
                 SizedBox(
                   height: media.width * 0.04,

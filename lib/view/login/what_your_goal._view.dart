@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
