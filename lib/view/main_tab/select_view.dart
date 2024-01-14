@@ -19,7 +19,7 @@ class SelectView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             RoundButton(
-                title: "Workout Tracker",
+                title: "Antrenman Takipçisi",
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -32,7 +32,7 @@ class SelectView extends StatelessWidget {
               height: 15,
             ),
             RoundButton(
-                title: "Meal Planner",
+                title: "Öğün Planlayıcısı",
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -45,7 +45,7 @@ class SelectView extends StatelessWidget {
               height: 15,
             ),
             RoundButton(
-                title: "Sleep Tracker",
+                title: "Uyku Takipçisi",
                 onPressed: () {
                   Navigator.push(
                     context,

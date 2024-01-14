@@ -1,6 +1,5 @@
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/common_widget/round_button.dart';
-import 'package:fitness/view/meal_planner/meal_schedule_view.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
